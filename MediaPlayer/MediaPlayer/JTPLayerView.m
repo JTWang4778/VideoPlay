@@ -48,7 +48,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        AVPlayerItem * item = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:@"http://cdn-qiniu-hls-ssl.gn100.com/hls/1475985752/672212_27617_167774822/W1swLDM5MF1d/hd.m3u8?qiniu_key=1496493390-0-0-62a8f03eb8e525a3bda557cbea4973b6"]];
+        self.backgroundColor = [UIColor grayColor];
+        AVPlayerItem * item = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:@"http://cdn-qiniu-hls-ssl.gn100.com/hls/1496395048/246_67579_167774822/W1swLDMxMDVdXQ/low.m3u8?qiniu_key=1496779148-0-0-cbe75515fdf6bf2645d9b59e08601723"]];
         self.avPlayer = [[AVPlayer alloc] initWithPlayerItem:item];
         AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.avPlayer];
         playerLayer.videoGravity = AVLayerVideoGravityResize;
@@ -62,8 +63,37 @@
         
         self.volumeView.frame = CGRectMake(-1000, -1000, 20, 20);
 //        [self addSubview:self.volumeView];
+        
+        UIButton *scaleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [scaleButton setTitle:@"全屏" forState:UIControlStateNormal];
+        [scaleButton setTitle:@"缩小" forState:UIControlStateSelected];
+        [scaleButton sizeToFit];
+        scaleButton.frame = CGRectMake(frame.size.width - scaleButton.frame.size.width - 20, frame.size.height - scaleButton.frame.size.height - 20, scaleButton.frame.size.width, scaleButton.frame.size.height);
+        [scaleButton addTarget:self action:@selector(didClickScale:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:scaleButton];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.avPlayer];
+    playerLayer.frame = self.bounds;
+}
+
+- (void)didClickScale: (UIButton *)sender{
+    
+    if (sender.selected) {
+        NSLog(@"缩小");
+        [self.delegate small];
+    }else{
+        
+        [self.delegate big];
+
+    }
+    sender.selected = !sender.selected;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

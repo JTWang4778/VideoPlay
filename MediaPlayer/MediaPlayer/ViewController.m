@@ -11,13 +11,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "JTPLayerView.h"
 
-@interface ViewController ()
+@interface ViewController ()<JTPLayerViewDelegate>
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 
 @property (nonatomic,strong)MPMoviePlayerViewController *viewPlayer;
 
-@property (nonatomic,strong)JTPLayerView   *playerView;
+@property (nonatomic,weak)JTPLayerView   *playerView;
 
 @end
 
@@ -37,13 +37,15 @@
 - (IBAction)didClickAVPlayer:(id)sender {
         
     JTPLayerView *playerView = [[JTPLayerView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.width * 9.0 / 16.0)];
+    playerView.delegate = self;
     [self.view addSubview:playerView];
+    self.playerView = playerView;
     
 }
 
 - (void)testViewPlayer{
     
-    MPMoviePlayerViewController *viewPlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:@"http://cdn-qiniu-hls-ssl.gn100.com/hls/1475985752/672212_27617_167774822/W1swLDM5MF1d/hd.m3u8?qiniu_key=1496474791-0-0-d4ef95681baff461bdc3a99d972b2335"]];
+    MPMoviePlayerViewController *viewPlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:@"http://cdn-qiniu-hls-ssl.gn100.com/hls/1496395048/246_67579_167774822/W1swLDMxMDVdXQ/low.m3u8?qiniu_key=1496779148-0-0-cbe75515fdf6bf2645d9b59e08601723"]];
     /*
      MPMoviePlayerViewController  是一个控制器 是对MPMoviePlayerController 的封装，其中有一个MPMoviePlayerController 的属性 并且让view添加到自身大小  并且提供了模态展示和移除控制器的方法
      
@@ -88,6 +90,33 @@
 }
 
 
+- (void)big{
+    
+    UIWindow *asdf = [UIApplication sharedApplication].keyWindow;
+    CGRect rectInWindow = [self.playerView convertRect:self.playerView.bounds toView:[UIApplication sharedApplication].keyWindow];
+    
+    [self.playerView removeFromSuperview];
+    self.playerView.userInteractionEnabled = YES;
+    self.playerView.frame = rectInWindow;
+    
+    [asdf addSubview:self.playerView];
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.playerView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        self.playerView.bounds = CGRectMake(0, 0, CGRectGetHeight(self.playerView.superview.bounds), CGRectGetWidth(self.playerView.superview.bounds));
+//        self.playerView.bounds = CGRectMake(0, 0, CGRectGetHeight([UIScreen mainScreen].bounds), CGRectGetWidth([UIScreen mainScreen].bounds));
+        self.playerView.center = CGPointMake(CGRectGetMidX(self.playerView.superview.bounds), CGRectGetMidY(self.playerView.superview.bounds));
+    } completion:^(BOOL finished) {
+    }];
+}
+
+- (void)small{
+    
+    [self.playerView removeFromSuperview];
+    [self.view addSubview:self.playerView];
+    self.playerView.userInteractionEnabled = YES;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
