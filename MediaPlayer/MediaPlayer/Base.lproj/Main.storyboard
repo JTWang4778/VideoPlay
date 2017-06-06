@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CVv-fF-Od9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bg6-16-KOc">
+                                <rect key="frame" x="133.5" y="318.5" width="108" height="30"/>
+                                <state key="normal" title="模态播放控制器"/>
+                                <connections>
+                                    <action selector="didClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uZA-kr-yuF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSC-Y3-XLo">
+                                <rect key="frame" x="157" y="356" width="61" height="30"/>
+                                <state key="normal" title="AVPlayer"/>
+                                <connections>
+                                    <action selector="didClickAVPlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hoP-Hc-E9S"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bg6-16-KOc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K5O-RW-tTn"/>
+                            <constraint firstItem="dSC-Y3-XLo" firstAttribute="centerX" secondItem="bg6-16-KOc" secondAttribute="centerX" id="WbE-2C-mBD"/>
+                            <constraint firstItem="bg6-16-KOc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hWv-dC-BWe"/>
+                            <constraint firstItem="dSC-Y3-XLo" firstAttribute="top" secondItem="bg6-16-KOc" secondAttribute="bottom" constant="7.5" id="vD4-KT-UbL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mVn-qr-2RG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1438" y="781"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="bao-aG-enJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nPW-tj-0bK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="ASe-lC-Nbt"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W2k-3C-7pE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="nxa-Zn-lIP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LIF-8r-s9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="801" y="789"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="AsS-37-4cP">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="CVv-fF-Od9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="OJt-IC-v9q">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="nPW-tj-0bK" kind="relationship" relationship="viewControllers" id="WNX-j8-3eO"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x3X-1v-ghe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133.59999999999999" y="789.35532233883066"/>
+        </scene>
+    </scenes>
+</document>
